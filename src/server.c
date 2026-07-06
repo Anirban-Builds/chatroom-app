@@ -16,7 +16,7 @@ void* client_thread(void* arg)
         total += bytes;
         char *header_end = strstr(buffer, "\r\n\r\n");
         if(!header_end) continue;
-        char *cl = strstr(buffer, "Content-Length: ");
+        char *cl = STRCASESTR(buffer, "Content-Length: ");
          if(cl){
             int content_length = atoi(cl + 16);
             int header_len = (header_end + 4) - buffer;

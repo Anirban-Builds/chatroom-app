@@ -1,7 +1,6 @@
 #include "file_manager.h"
 #include "common.h"
 #include "handler.h"
-#include "ctype.h"
 
 #define ARGS SOCKET fd, char* body, char* buffer
 
@@ -37,7 +36,7 @@ void file_upload(ARGS) {
     snprintf(end_boundary, sizeof(end_boundary), "--%s", boundary);
     char *file_end = NULL;
     int content_length = 0;
-    char *cl = strstr(buffer, "Content-Length:");
+    char *cl = STRCASESTR(buffer, "Content-Length:");
     if (cl) sscanf(cl + 15, "%d", &content_length);
     int body_remaining_len = content_length - (file_data - body);
     #ifdef _WIN32

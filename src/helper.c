@@ -25,7 +25,7 @@ void load_env(char *filename){
 
 int is_allowed_origin(char* request)
 {
-    char* origin_start = strstr(request, "Origin: ");
+    char* origin_start = STRCASESTR(request, "Origin: ");
     if (!origin_start) {
         return 0;
     }
@@ -51,5 +51,17 @@ int is_edit_msg(char* buffer){
     return 1;
     }
 return 0;
+}
+
+char* strcasestr_custom(char* str, char* substr) {
+    if (!*substr) return (char*)str;
+    for (; *str; str++) {
+        const char *h = str, *n = substr;
+        while (*h && *n && tolower((unsigned char)*h) == tolower((unsigned char)*n)) {
+            h++; n++;
+        }
+        if (!*n) return (char*)str;
+    }
+    return NULL;
 }
 

@@ -24,7 +24,7 @@ static void base64_encode(unsigned char* input, int len, char* output){
 }
 
 int handle_websocket_handshake(SOCKET fd, char* buffer){
-    char* key_start = strstr(buffer, "Sec-WebSocket-Key: ");
+    char* key_start = STRCASESTR(buffer, "Sec-WebSocket-Key: ");
     if(!key_start) return 1;
     key_start += 19;
 

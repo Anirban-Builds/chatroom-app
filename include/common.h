@@ -15,6 +15,8 @@
     #define MUTEX_UNLOCK(m) LeaveCriticalSection(&(m))
     #define SHUTDOWN_BOTH(fd) shutdown((fd), SD_BOTH)
     #define SET_ENV(key, value) _putenv_s(key, value)
+    char* strcasestr_custom(char*, char*);
+    #define STRCASESTR strcasestr_custom
 #else
     #include <pthread.h>
     #include <unistd.h>
@@ -32,11 +34,13 @@
     #define MUTEX_UNLOCK(m) pthread_mutex_unlock(&(m))
     #define SHUTDOWN_BOTH(fd) shutdown((fd), SHUT_RDWR)
     #define SET_ENV(key, value) setenv(key, value, 1)
+    #define STRCASESTR strcasestr
 #endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <openssl/sha.h>
 #include <openssl/bio.h>
 #include <openssl/evp.h>
