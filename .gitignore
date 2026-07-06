@@ -1,0 +1,6 @@
+*.exe
+.vscode
+build
+uploads
+*.o
+.env
