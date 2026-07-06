@@ -80,6 +80,7 @@ void file_upload(ARGS) {
     char *underscore = strchr(path, '_');
     if (underscore) {safe_fn = underscore + 1; }
     snprintf(data, sizeof(data), "{\"url\": \"https://anirban0011-chatroom-app.hf.space/uploads/%s/%ld\"}", safe_fn, timestamp);
+    //localhost:7860
     handle_response(fd, "success", 200, "OK", data);
 }
 
