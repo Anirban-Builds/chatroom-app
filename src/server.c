@@ -23,7 +23,7 @@ void* client_thread(void* arg)
             if (header_len + content_length >= BUFFER_SIZE) {
                 handle_response(client_fd, "failure", 413, "Payload Too Large", "");
                 free(buffer);
-                closesocket(client_fd);
+                close_socket(client_fd);
                 return 0;
             }
             if(total >= header_len + content_length) break;

@@ -17,7 +17,7 @@ void add_client(SOCKET fd, char* username){
     if(clients[i].active && strcmp(clients[i].username, username) == 0){
         send_websocket_close(clients[i].fd, 4001, "Username already inside room");
         SHUTDOWN_BOTH(clients[i].fd);
-        closesocket(clients[i].fd);
+        close_socket(clients[i].fd);
         clients[i].active = 0;
         break;
         }
