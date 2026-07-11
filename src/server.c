@@ -40,6 +40,8 @@ void* client_thread(void* arg)
 
 int run_server(){
 
+    setbuf(stdout, NULL);
+
     #ifdef _WIN32
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2, 2), &wsa) !=0) return 1;
@@ -96,4 +98,6 @@ int run_server(){
     #ifdef _WIN32
     WSACleanup();
     #endif
+
+    return 0;
 }
