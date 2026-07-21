@@ -25,11 +25,12 @@ void route_http_request(SOCKET client_fd, char* buffer){
     char* q = strchr(path, '?');
     if(q) *q = '\0';
 
-    if(!strcmp(method, "OPTIONS")){
     if(!is_allowed_origin(buffer)){
         handle_response(client_fd, "ERROR", 403, "Origin not allowed", "");
         return;
     }
+
+    if(!strcmp(method, "OPTIONS")){
     handle_preflight(client_fd);
     return;
 }
